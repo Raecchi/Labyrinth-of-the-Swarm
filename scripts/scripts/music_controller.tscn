@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://6uqm4y4tei1d"]
+
+[ext_resource type="Script" path="res://music_controller.gd" id="1_gbrld"]
+[ext_resource type="AudioStream" uid="uid://cptk7hw1egqjn" path="res://sound/music/febblemask_custom_boss.wav" id="2_gdvvj"]
+
+[node name="MusicController" type="Node"]
+script = ExtResource("1_gbrld")
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_gdvvj")
+volume_db = -10.0

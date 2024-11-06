@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dve3am2pwvlpl"]
+
+[ext_resource type="Script" path="res://scripts/sfx_controller.gd" id="1_d5bih"]
+
+[node name="sfx_controller" type="Node"]
+script = ExtResource("1_d5bih")
+
+[node name="sfx" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
