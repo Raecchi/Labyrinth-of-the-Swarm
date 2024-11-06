@@ -1,0 +1,151 @@
+[gd_scene load_steps=12 format=3 uid="uid://cn62y1xpudved"]
+
+[ext_resource type="Script" path="res://object/boss_3.gd" id="1_ouxpy"]
+[ext_resource type="Texture2D" uid="uid://dcukmihjghrya" path="res://sprites/boss3.png" id="1_pcchv"]
+[ext_resource type="Texture2D" uid="uid://ovpsr1aahui3" path="res://sprites/boss3_tail.png" id="2_v6qhu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qn65m"]
+atlas = ExtResource("2_v6qhu")
+region = Rect2(0, 0, 16, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frbyw"]
+atlas = ExtResource("2_v6qhu")
+region = Rect2(16, 0, 16, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8lfg4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qn65m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frbyw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nbsyr"]
+radius = 16.0
+height = 32.0
+
+[sub_resource type="Animation" id="Animation_o4q3m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("head:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_4vrdn"]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("head:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.933333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.933333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"ready_up"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2q4e8"]
+_data = {
+"RESET": SubResource("Animation_o4q3m"),
+"spawn": SubResource("Animation_4vrdn")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_emprg"]
+radius = 20.025
+
+[node name="boss_3" type="CharacterBody2D" groups=["dynamic", "enemy"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_ouxpy")
+score = 5000
+
+[node name="head" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("1_pcchv")
+hframes = 3
+vframes = 2
+frame = 3
+
+[node name="tail" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -18)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_8lfg4")
+autoplay = "default"
+frame_progress = 0.65677
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_nbsyr")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2q4e8")
+}
+autoplay = "spawn"
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, 12)
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+modulate = Color(0.783689, 0.668957, 0.168316, 1)
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_emprg")
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

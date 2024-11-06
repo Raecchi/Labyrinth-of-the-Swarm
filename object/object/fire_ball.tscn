@@ -1,0 +1,105 @@
+[gd_scene load_steps=10 format=3 uid="uid://cydkpglmbne4f"]
+
+[ext_resource type="Script" path="res://object/fire_ball.gd" id="1_3qj7j"]
+[ext_resource type="Texture2D" uid="uid://ctxk40jns2tiq" path="res://sprites/fire_ball.png" id="1_io0u4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yqxs"]
+atlas = ExtResource("1_io0u4")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxjvf"]
+atlas = ExtResource("1_io0u4")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_457tq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yqxs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yxjvf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ha5ow"]
+size = Vector2(7, 7.33333)
+
+[sub_resource type="Animation" id="Animation_3mktk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5jfxy"]
+resource_name = "spawn"
+length = 0.250005
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.498039), Color(1, 1, 1, 1), Color(1, 1, 1, 0.498039), Color(1, 1, 1, 1), Color(1, 1, 1, 0.498039), Color(1, 1, 1, 1), Color(1, 1, 1, 0.498039), Color(1, 1, 1, 1), Color(1, 1, 1, 0.498039), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_speed"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oa6eo"]
+_data = {
+"RESET": SubResource("Animation_3mktk"),
+"spawn": SubResource("Animation_5jfxy")
+}
+
+[node name="fire_ball" type="Area2D" groups=["dynamic"]]
+rotation = 1.5708
+scale = Vector2(2, 2)
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_3qj7j")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_457tq")
+autoplay = "default"
+frame_progress = 0.258899
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.166667, -8.67581e-08)
+shape = SubResource("RectangleShape2D_ha5ow")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_oa6eo")
+}
+autoplay = "spawn"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://brp8xcu25rrsp"]
+
+[ext_resource type="Texture2D" uid="uid://d2w1yxmujke0h" path="res://sprites/enemy_ranger_bullet.png" id="1_hvut1"]
+[ext_resource type="Script" path="res://object/enemy_range_bullet.gd" id="1_rhy8a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oygco"]
+atlas = ExtResource("1_hvut1")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6dib"]
+atlas = ExtResource("1_hvut1")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kc7m1"]
+atlas = ExtResource("1_hvut1")
+region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_isa8w"]
+atlas = ExtResource("1_hvut1")
+region = Rect2(8, 8, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lxsq8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oygco")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6dib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kc7m1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_isa8w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wk8k8"]
+radius = 3.0
+
+[node name="enemy_range_bullet" type="Area2D" groups=["dynamic"]]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_rhy8a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lxsq8")
+autoplay = "default"
+frame_progress = 0.350627
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wk8k8")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

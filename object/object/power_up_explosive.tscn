@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://ykbpsji4gt4s"]
+
+[ext_resource type="Texture2D" uid="uid://utvk1x5fd2dr" path="res://sprites/power_up_explosive.png" id="1_aadfs"]
+[ext_resource type="Script" path="res://object/power_up_explosive.gd" id="1_wn1gj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i5c4o"]
+size = Vector2(8, 8)
+
+[node name="power_up_explosive" type="Area2D" groups=["dynamic"]]
+z_index = -1
+script = ExtResource("1_wn1gj")
+
+[node name="PowerUpExplosive" type="Sprite2D" parent="."]
+texture = ExtResource("1_aadfs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_i5c4o")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

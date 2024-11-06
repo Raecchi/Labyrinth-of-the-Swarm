@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://c602n48bpgjs6"]
+
+[ext_resource type="Script" path="res://object/power_up_invincible.gd" id="1_t3oag"]
+[ext_resource type="Texture2D" uid="uid://biuy57jrllv4m" path="res://sprites/power_up_invincible.png" id="1_y12h5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ttnxi"]
+size = Vector2(8, 8)
+
+[node name="power_up_invincible" type="Area2D" groups=["dynamic"]]
+z_index = -1
+script = ExtResource("1_t3oag")
+
+[node name="PowerUpInvincible" type="Sprite2D" parent="."]
+texture = ExtResource("1_y12h5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ttnxi")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

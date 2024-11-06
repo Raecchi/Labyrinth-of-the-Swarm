@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1ave2p3el4o1"]
+
+[ext_resource type="Texture2D" uid="uid://sq05s8jhyix0" path="res://sprites/power_up_bubble.png" id="1_d4m27"]
+[ext_resource type="Script" path="res://object/power_up_bubble.gd" id="1_f8yt5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xlbt2"]
+size = Vector2(8, 8)
+
+[node name="power_up_bubble" type="Area2D" groups=["dynamic"]]
+z_index = -1
+script = ExtResource("1_f8yt5")
+
+[node name="PowerUpBubble" type="Sprite2D" parent="."]
+texture = ExtResource("1_d4m27")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xlbt2")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

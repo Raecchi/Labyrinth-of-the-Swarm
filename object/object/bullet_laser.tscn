@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://evvv8iekpcty"]
+
+[ext_resource type="Texture2D" uid="uid://duda74kohpj0p" path="res://sprites/bullet_laser.png" id="1_6elfr"]
+[ext_resource type="Script" path="res://object/bullet_laser.gd" id="1_nwtou"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4og3r"]
+size = Vector2(6, 1)
+
+[node name="bullet_laser" type="Area2D"]
+scale = Vector2(1, 2)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("1_nwtou")
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["dynamic"]]
+position = Vector2(3, 3)
+texture = ExtResource("1_6elfr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -0.5)
+shape = SubResource("RectangleShape2D_4og3r")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

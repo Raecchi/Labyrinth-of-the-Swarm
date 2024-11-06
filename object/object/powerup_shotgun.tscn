@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl1dgfmscuq32"]
+
+[ext_resource type="Script" path="res://object/powerup_shotgun.gd" id="1_tfh8s"]
+[ext_resource type="Texture2D" uid="uid://hp6bg56d4h4o" path="res://sprites/power_up_triple.png" id="1_tg6me"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wyvd8"]
+size = Vector2(8, 8)
+
+[node name="powerup_shotgun" type="Area2D" groups=["dynamic"]]
+z_index = -1
+script = ExtResource("1_tfh8s")
+
+[node name="PowerUpTriple" type="Sprite2D" parent="."]
+texture = ExtResource("1_tg6me")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wyvd8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

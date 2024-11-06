@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://2pk81siw5r44"]
+
+[ext_resource type="Texture2D" uid="uid://cho6wtjrbe0k7" path="res://sprites/power_up_laser.png" id="1_4tomt"]
+[ext_resource type="Script" path="res://object/power_up_laser.gd" id="1_6chqy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_55vcs"]
+size = Vector2(8, 8)
+
+[node name="power_up_laser" type="Area2D" groups=["dynamic"]]
+z_index = -1
+script = ExtResource("1_6chqy")
+
+[node name="PowerUpLaser" type="Sprite2D" parent="."]
+texture = ExtResource("1_4tomt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_55vcs")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

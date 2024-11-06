@@ -1,0 +1,250 @@
+[gd_scene load_steps=9 format=3 uid="uid://bth74ur5xg2ge"]
+
+[ext_resource type="Script" path="res://object/boss_1.gd" id="1_2d3bt"]
+[ext_resource type="Texture2D" uid="uid://ce2he1avddypq" path="res://sprites/boss1_shadow_upscaled.png" id="1_fyf5o"]
+[ext_resource type="Texture2D" uid="uid://dgea7iw571av8" path="res://sprites/boss_upscaled.png" id="1_s4wum"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1wnjf"]
+size = Vector2(42, 26)
+
+[sub_resource type="Animation" id="Animation_knlc1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Boss1ShadowUpscaled:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossUpscaled:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BossUpscaled:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BossUpscaled:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.392157)]
+}
+
+[sub_resource type="Animation" id="Animation_omi2i"]
+resource_name = "jump"
+length = 1.50001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossUpscaled:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.2, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Boss1ShadowUpscaled:frame")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 0.4, 0.6, 0.7, 0.9, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 2, 1, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BossUpscaled:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 0.7, 0.8, 1.2),
+"transitions": PackedFloat32Array(1.07177, 1.03527, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -28), Vector2(0, -28), Vector2(0, 0)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3, 0.3001, 1.2, 1.2001),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [2, false],
+"method": &"set_collision_layer_value"
+}, {
+"args": [],
+"method": &"pick_target"
+}, {
+"args": [2, true],
+"method": &"set_collision_layer_value"
+}, {
+"args": [],
+"method": &"spawn_enemies"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_5voqx"]
+resource_name = "spawn_in"
+length = 0.600005
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.55),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossUpscaled:modulate")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.392157), Color(1, 1, 1, 1), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 1), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 1), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 1), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 1), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.55),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"ready_up"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mxac0"]
+_data = {
+"RESET": SubResource("Animation_knlc1"),
+"jump": SubResource("Animation_omi2i"),
+"spawn_in": SubResource("Animation_5voqx")
+}
+
+[node name="boss1" type="CharacterBody2D" groups=["dynamic", "enemy"]]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_2d3bt")
+score = 5000
+
+[node name="Boss1ShadowUpscaled" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.439216)
+position = Vector2(0, 24)
+texture = ExtResource("1_fyf5o")
+hframes = 2
+vframes = 2
+
+[node name="BossUpscaled" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
+texture = ExtResource("1_s4wum")
+hframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 19)
+shape = SubResource("RectangleShape2D_1wnjf")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mxac0")
+}
+autoplay = "spawn_in"
+
+[node name="spawners" type="Node2D" parent="."]
+
+[node name="left_top" type="Marker2D" parent="spawners"]
+position = Vector2(-17, 15)
+
+[node name="left_mid" type="Marker2D" parent="spawners"]
+position = Vector2(-24, 22)
+
+[node name="left_bot" type="Marker2D" parent="spawners"]
+position = Vector2(-17, 29)
+
+[node name="right_top" type="Marker2D" parent="spawners"]
+position = Vector2(17, 15)
+
+[node name="right_mid" type="Marker2D" parent="spawners"]
+position = Vector2(24, 22)
+
+[node name="right_bot" type="Marker2D" parent="spawners"]
+position = Vector2(17, 29)
+
+[node name="regions" type="Node" parent="."]
+
+[node name="top_left" type="Marker2D" parent="regions"]
+position = Vector2(64, 64)
+
+[node name="top_right" type="Marker2D" parent="regions"]
+position = Vector2(192, 64)
+
+[node name="bot_left" type="Marker2D" parent="regions"]
+position = Vector2(64, 176)
+
+[node name="bot_right" type="Marker2D" parent="regions"]
+position = Vector2(192, 176)
+
+[node name="mid" type="Marker2D" parent="regions"]
+position = Vector2(128, 120)

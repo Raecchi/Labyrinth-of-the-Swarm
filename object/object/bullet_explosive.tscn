@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2t1gdysud3i"]
+
+[ext_resource type="Script" path="res://object/bullet_explosive.gd" id="1_7yrn8"]
+[ext_resource type="Texture2D" uid="uid://bskfybhsaai2a" path="res://sprites/bullet_explosive.png" id="1_w75ko"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5q0v7"]
+size = Vector2(6, 6)
+
+[node name="bullet_explosive" type="Area2D" groups=["dynamic"]]
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("1_7yrn8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_w75ko")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5q0v7")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
